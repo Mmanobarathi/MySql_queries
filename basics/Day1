@@ -1,0 +1,16 @@
+-- Day 1: SQL Basics Practice
+
+-- Select all customers
+SELECT * FROM customers;
+
+-- Count total customers
+SELECT COUNT(*) FROM customers;
+
+-- Select customers from Germany
+SELECT * 
+FROM customers
+WHERE country = 'Germany';
+
+-- Total revenue from orders
+SELECT SUM(order_amount) AS total_revenue
+FROM orders;
