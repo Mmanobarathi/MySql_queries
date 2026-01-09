@@ -14,3 +14,13 @@ WHERE country = 'Germany';
 -- Total revenue from orders
 SELECT SUM(order_amount) AS total_revenue
 FROM orders;
+
+-- Day 2 
+
+SELECT 
+    name,
+    gdp / population AS per_capita_gdp
+FROM 
+    world
+WHERE 
+    population >= 200000000;
