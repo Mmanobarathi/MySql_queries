@@ -1,26 +1,73 @@
--- Day 1: SQL Basics Practice
 
--- Select all customers
-SELECT * FROM customers;
+Learning in progress — updated regularly.
 
--- Count total customers
-SELECT COUNT(*) FROM customers;
+## Day 1
 
--- Select customers from Germany
-SELECT * 
-FROM customers
-WHERE country = 'Germany';
+1.Problem :Query the total population of all cities in CITY where District is California.
+My solution :
+select sum(population) from city where district = 'California';
+## sum() to get aggregation of a column or total value of a field, can also be combined with WHERE condition .
 
--- Total revenue from orders
-SELECT SUM(order_amount) AS total_revenue
-FROM orders;
+2.problem :Query the average population of all cities in CITY where District is California
+My solution:
+select avg(population) from city where district = 'California';
+## function avg() is used to find average of a column.
 
--- Day 2 
+3.Problem:Query the average population for all cities in CITY, rounded down to the nearest i
+My solution:
+select floor(avg(population)) from city; 
+## floor () is used to round to nearest integer 
+syntax : floor(avg(col_name))
 
-SELECT 
-    name,
-    gdp / population AS per_capita_gdp
-FROM 
-    world
-WHERE 
-    population >= 200000000;
+4:Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+my sol
+select city from station where city like 'a%'
+or city like 'e%'
+or city like 'i%'
+or city like 'o%'
+or city like 'u%';
+## like keyword is used to get a pattern from a field , here OR is used and AND is not used because , AND will select only when a country name starts with all vowels .
+
+
+5.Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+my sol:
+SELECT DISTINCT city
+FROM station
+WHERE
+  (city LIKE 'a%' OR city LIKE 'e%' OR city LIKE 'i%' OR city LIKE 'o%' OR city LIKE 'u%')
+  AND
+  (city LIKE '%a' OR city LIKE '%e' OR city LIKE '%i' OR city LIKE '%o' OR city LIKE '%u');
+## when to satisfy both conditions we use "AND".
+
+6.Query the list of CITY names from STATION that do not end with vowels.
+my sol:
+SELECT DISTINCT city
+FROM station
+WHERE city NOT REGEXP '[aeiou]$';
+
+## learnt new keyword or function instead of "like" ,"REGEXP"
+syntax : 
+col_name REGEXP '^[pattern]' ; ##  ^ for starting character 
+col_name REGEXP '[pattern]$' ; ##  $ for ending character 
+
+7.Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+my sol:
+
+SELECT DISTINCT city
+FROM station
+WHERE city NOT REGEXP '^[aeiou]'OR
+city not REGEXP '[aeiou]$';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
