@@ -1,0 +1,44 @@
+CREATE DATABASE euro_education;
+use euro_education;
+SHOW TABLES;
+DESCRIBE countries;
+ALTER TABLE countries
+MODIFY country VARCHAR(100); -- adjust length as needed
+ALTER TABLE countries
+ADD CONSTRAINT uq_country_name UNIQUE (country);
+DESCRIBE countries;
+SHOW INDEXES FROM countries;
+SELECT country_id, country
+FROM countries
+WHERE country = 'Germany';
+ALTER TABLE origin
+ADD COLUMN country_id INT;
+UPDATE origin o
+JOIN countries co ON o.coloumn1 = co.country
+SET o.country_id = co.country_id;
+ALTER TABLE origin
+CHANGE COLUMN column1 country VARCHAR(100);
+describe origin;
+UPDATE origin o
+JOIN countries c ON o.country = c.country
+SET o.country_id = c.country_id;
+-- Turn off safe updates
+SET SQL_SAFE_UPDATES = 0;
+
+-- Run your update
+UPDATE origin o
+JOIN countries c ON o.country = c.country
+SET o.country_id = c.country_id;
+
+-- (Optional) Turn safe updates back on
+SET SQL_SAFE_UPDATES = 1;
+DROP TABLE IF EXISTS course;
+ALTER TABLE course
+MODIFY COLUMN country VARCHAR(100);
+ALTER TABLE course
+ADD COLUMN country_id INT;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE course co
+JOIN countries c ON co.country = c.country
+SET co.country_id = c.country_id;
+describe course;
